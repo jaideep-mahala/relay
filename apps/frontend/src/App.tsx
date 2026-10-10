@@ -1,24 +1,22 @@
-import { APITester } from "./APITester";
-import "./index.css";
+import { useState , useEffect } from 'react'
+import './App.css'
 
-import logo from "./logo.svg";
-import reactLogo from "./react.svg";
+function App() {
+  const [ws, setws] = useState(new WebSocket("ws://localhost:5000"))
 
-export function App() {
+  useEffect(() => {
+    ws.onopen = () => {
+      if(ws){
+        ws.send("hi");
+      }
+    }
+  }, [ws])
+
   return (
-    <div className="app">
-      <div className="logo-container">
-        <img src={logo} alt="Bun Logo" className="logo bun-logo" />
-        <img src={reactLogo} alt="React Logo" className="logo react-logo" />
-      </div>
-
-      <h1>Bun + React</h1>
-      <p>
-        Edit <code>src/App.tsx</code> and save to test HMR
-      </p>
-      <APITester />
-    </div>
-  );
+    <>
+      hello there
+    </>
+  )
 }
 
-export default App;
+export default App

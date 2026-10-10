@@ -2,11 +2,18 @@
   "name": "db",
   "module": "index.ts",
   "type": "module",
+  "exports":{
+    "./client": "./index.ts"
+  },
   "private": true,
   "devDependencies": {
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^7"
+  },
+  "dependencies": {
+    "@types/mongoose": "^5.11.97",
+    "mongoose": "^9.11.1"
   }
 }
