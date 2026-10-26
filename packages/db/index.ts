@@ -1,14 +1,29 @@
 import mongoose from "mongoose";
 
-export const Workspace = new mongoose.Schema({
-    path: String,
-    name: String,
-})
+export const workspaceSchema = new mongoose.Schema({
+  path: String,
+  name: String,
+});
 
-export const Session = new mongoose.Schema({
-    conversation: [Object],
-    workspace: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Workspace' }],
-})
+export const sessionSchema = new mongoose.Schema({
+  workspace: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Workspace",
+  },
+  conversations: [
+    {
+      role: {
+        type: String,
+        enum: ["user", "assistant"],
+      },
+      payload: Object,
+    },
+  ],
+  anthropicSessionId: {
+    type: String,
+    required: false,
+  },
+});
 
-export const WorkspaceModel = mongoose.model("Workspace" , Workspace);
-export const SessionModel = mongoose.model("Session" , Session);
+export const workspaceModel = mongoose.model("Workspace", workspaceSchema);
+export const sessionModel = mongoose.model("Session", sessionSchema);
