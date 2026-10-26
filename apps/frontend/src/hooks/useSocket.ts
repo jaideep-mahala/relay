@@ -5,11 +5,11 @@ export function useSocket(){
     const [loading , setLoading] = useState(true);
 
     useEffect(() => {
-        const ws = WebSocket("ws://localhost:5000");
+        const ws = new WebSocket("ws://localhost:5000");
 
         ws.onopen = () => {
             setSocket(ws);
-            setLoading(true);
+            setLoading(false);
         };
 
     }, []);
